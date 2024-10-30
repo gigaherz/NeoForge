@@ -1344,7 +1344,7 @@ public class CommonHooks {
 
             @Override
             public boolean canSerializeIn(HolderOwner<T> other) {
-                return Delegate.super.canSerializeIn(other) || other == lookup;
+                return Delegate.super.canSerializeIn(other) || lookup.canSerializeIn(other);
             }
         };
     }
