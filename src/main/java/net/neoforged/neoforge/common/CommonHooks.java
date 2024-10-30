@@ -45,6 +45,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.core.Holder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.HolderLookup.RegistryLookup;
+import net.minecraft.core.HolderOwner;
 import net.minecraft.core.HolderSet;
 import net.minecraft.core.Registry;
 import net.minecraft.core.component.DataComponentMap;
@@ -1339,6 +1340,11 @@ public class CommonHooks {
             @Override
             public Optional<HolderSet.Named<T>> get(TagKey<T> key) {
                 return Optional.of(HolderSet.emptyNamed(lookup, key));
+            }
+
+            @Override
+            public boolean canSerializeIn(HolderOwner<T> other) {
+                return Delegate.super.canSerializeIn(other) || other == lookup;
             }
         };
     }
